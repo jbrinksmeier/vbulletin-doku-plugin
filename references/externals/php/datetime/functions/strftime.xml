@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 313892 $ -->
+<!-- EN-Revision: n/a Maintainer: sammywg Status: working -->
+
+  <refentry xml:id="function.strftime" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <refnamediv>
+    <refname>strftime</refname>
+    <refpurpose>
+     Formatiert eine Zeit-/Datumsangabe nach den lokalen Einstellungen
+    </refpurpose>
+   </refnamediv>
+   <refsect1>
+    <title>Beschreibung:</title>
+     <methodsynopsis>
+      <type>string</type><methodname>strftime</methodname>
+      <methodparam><type>string</type><parameter>format</parameter></methodparam>
+      <methodparam choice="opt"><type>int</type><parameter>
+        Timestamp
+       </parameter></methodparam>
+     </methodsynopsis>
+    <para>
+     Gibt einen String zurück, der den angegebenen Formatierungs-Merkmalen
+     entspricht. Dabei wird der gegebene <parameter>Timestamp</parameter>/
+     Zeitstempel oder - falls dieser fehlt - die momentane lokale Zeit benutzt.
+     Der Monats- und Wochentagsname wird entsprechend des per
+     <function>setlocale</function> eingestellten Wertes gesetzt.
+    </para>
+    <para>
+     Nachfolgend die im Formatierungsstring gültigen / bekannten
+     Platzhalter:
+     <itemizedlist>
+      <listitem>
+       <simpara>
+        %a - abgekürzter Name des Wochentages, abhängig von der
+        gesetzten Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %A - ausgeschriebener Name des Wochentages, abhängig von der
+        gesetzten Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %b - abgekürzter Name des Monats, abhängig von der gesetzten
+        Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %B - ausgeschriebener Name des Monats, abhängig von der
+        gesetzten Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %c - Wiedergabewerte für Datum und Zeit, abhängig von der
+        gesetzten Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %C - Jahrhundert (Jahr geteilt durch 100, gekürzt auf Integer,
+        Wertebereich 00 bis 99)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %d - Tag des Monats als Zahl (Bereich 01 bis 31)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %D - so wie %m/%d/%y
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %e - Tag des Monats als Dezimal-Wert, einstelligen Werten wird
+        ein Leerzeichen voran gestellt (Wertebereich ´ 1´ bis ´31´)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %g - wie %G, aber ohne Jahrhundert.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %G - Das vierstellige Jahr entsprechend der ISO Wochennummer (siehe %V).
+        Das gleiche Format und der gleiche Wert wie bei %Y. Besonderheit:
+        entspricht die ISO Wochennummer dem vorhergehenden oder folgenden
+        Jahr, wird dieses Jahr verwendet.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %h - so wie %b
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %H - Stunde als Zahl im 24-Stunden-Format (Bereich 00 bis 23)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %I - Stunde als Zahl im 12-Stunden-Format (Bereich 01 bis 12)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %j - Tag des Jahres als Zahl (Bereich 001 bis 366)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %m - Monat als Zahl (Bereich 01 bis 12)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %M - Minute als Dezimal-Wert
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %n - neue Zeile
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %p - entweder `am' oder `pm' (abhängig von der gesetzten
+        Umgebung) oder die entsprechenden Zeichenketten der gesetzten
+        Umgebung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %r - Zeit im Format a.m. oder p.m.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %R - Zeit in der 24-Stunden-Formatierung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %S - Sekunden als Dezimal-Wert
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %t - Tabulator
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %T - aktuelle Zeit, genau wie %H:%M:%S
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %u - Tag der Woche als Dezimal-Wert [1,7], dabei ist 1 der Montag.
+       </simpara>
+       <warning>
+        <simpara>
+         Sun Solaris scheint mit dem Sonntag als 1 zu starten,
+         obwohl ISO 9889:1999 (der aktuelle C Standard) klar
+         festlegt, dass es der Montag sein sollte.
+       </simpara>
+       </warning>
+      </listitem>
+      <listitem>
+       <simpara>
+        %U - Nummer der Woche des aktuellen Jahres als Dezimal-Wert,
+        beginnend mit dem ersten Sonntag als erstem Tag der ersten Woche.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %V - Kalenderwoche (nach ISO 8601:1988) des aktuellen Jahres.
+        Als Dezimal-Zahl mit dem Wertebereich 01 bis 53, wobei die
+        Woche 01 die erste Woche mit mindestens 4 Tagen im aktuellen
+        Jahr ist. Die Woche beginnt montags (nicht sonntags). (Benutzen Sie
+        %G or %g für die Jahreskomponente, die der Wochennummer für den
+        gegebenen Timestamp entspricht.)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %w - Wochentag als Dezimal-Wert, Sonntag ist 0
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %W - Nummer der Woche des aktuellen Jahres, beginnend mit dem
+        ersten Montag als erstem Tag der ersten Woche.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %x - bevorzugte Datumswiedergabe (ohne Zeit), abhängig von der
+        gesetzten Umgebung.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %X - bevorzugte Zeitwiedergabe (ohne Datum), abhängig von der
+        gesetzten Umgebung.
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %y - Jahr als 2-stellige-Zahl (Bereich 00 bis 99)
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %Y - Jahr als 4-stellige-Zahl inklusive des Jahrhunderts
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %Z - Zeitzone, Name oder eine Abkürzung
+       </simpara>
+      </listitem>
+      <listitem>
+       <simpara>
+        %% - ein %-Zeichen
+       </simpara>
+      </listitem>
+     </itemizedlist>
+     <note>
+      <para>
+       Es ist durchaus möglich, dass Ihre C-Bibliothek nicht alle angegebenen
+       Formatierungszeichen erkennt. In diesem Fall werden diese Zeichen von
+       der PHP-Funktion <function>strftime</function> nicht unterstützt.
+       Zusätzlich unterstützen nicht alle Plattformen negative Werte eines
+       Timestamps, deshalb könnte der Wertebereich eines Datums durch den
+       Beginn der Unix Epoche begrenzt sein. Das bedeutet, dass z.B. %e, %T,
+       %R und %D (und vielleicht noch weitere) und Zeitangaben vor dem
+       <literal>Jan 1, 1970</literal> auf Windowssystemen, einigen
+       Linuxdisrtibutionen und einigen anderen Betriebssytemen nicht
+       funktionieren. Für Windowsbetriebssysteme finden Sie eine komplette
+       Übersicht der gültigen / bekannten Platzhalter im Formatierungsstring
+       auf dieser
+       <link xlink:href="&url.strftime.win32;"><acronym>MSDN</acronym> Webseite</link>.
+      </para>
+     </note>
+     <example>
+      <title><function>strftime</function> locale Beispiel</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+setlocale(LC_TIME, "C");
+echo strftime("%A");
+setlocale(LC_TIME, "fi_FI");
+echo strftime(" in Finnish is %A,");
+setlocale(LC_TIME, "fr_FR");
+echo strftime(" in French %A and");
+setlocale(LC_TIME, "de_DE");
+echo strftime(" in German %A.\n");
+?>
+]]>
+      </programlisting>
+     </example>
+     Dieses Beispiel funktioniert nur, wenn auf Ihrem System die entsprechenden
+     Locale-Codes installiert sind.
+     <note>
+      <simpara>
+       %G und %V basieren auf ISO 8601:1988 Wochennummern und können unerwartete
+       (obwohl korrekte) Ergebnisse liefern, wenn Sie das Nummernsystem nicht
+       gründlich verstehen. Sehen Sie weiter oben bei %V nach und beachten Sie die
+       folgenden Beispiele.
+      </simpara>
+     </note>
+     <example>
+      <title>ISO 8601:1988 Wochennummer Beispiel</title>
+      <programlisting role="php">
+<![CDATA[
+<?php
+/*     December 2002 / January 2003
+ISOWk  M   Tu  W   Thu F   Sa  Su
+----- ----------------------------
+51     16  17  18  19  20  21  22
+52     23  24  25  26  27  28  29
+1      30  31   1   2   3   4   5
+2       6   7   8   9  10  11  12
+3      13  14  15  16  17  18  19   */
+
+// Ausgabe: 12/28/2002 - %V,%G,%Y = 52,2002,2002
+echo "12/28/2002 - %V,%G,%Y = " . strftime("%V,%G,%Y", strtotime("12/28/2002")) . "\n";
+
+// Ausgabe: 12/30/2002 - %V,%G,%Y = 1,2003,2002
+echo "12/30/2002 - %V,%G,%Y = " . strftime("%V,%G,%Y", strtotime("12/30/2002")) . "\n";
+
+// Ausgabe: 1/3/2003 - %V,%G,%Y = 1,2003,2003
+echo "1/3/2003 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("1/3/2003")) . "\n";
+
+// Ausgabe: 1/10/2003 - %V,%G,%Y = 2,2003,2003
+echo "1/10/2003 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("1/10/2003")) . "\n";
+
+
+
+/*     December 2004 / January 2005
+ISOWk  M   Tu  W   Thu F   Sa  Su
+----- ----------------------------
+51     13  14  15  16  17  18  19
+52     20  21  22  23  24  25  26
+53     27  28  29  30  31   1   2
+1       3   4   5   6   7   8   9
+2      10  11  12  13  14  15  16   */
+
+// Ausgabe: 12/23/2004 - %V,%G,%Y = 52,2004,2004
+echo "12/23/2004 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("12/23/2004")) . "\n";
+
+// Ausgabe: 12/31/2004 - %V,%G,%Y = 53,2004,2004
+echo "12/31/2004 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("12/31/2004")) . "\n";
+
+// Ausgabe: 1/2/2005 - %V,%G,%Y = 53,2004,2005
+echo "1/2/2005 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("1/2/2005")) . "\n";
+
+// Ausgabe: 1/3/2005 - %V,%G,%Y = 1,2005,2005
+echo "1/3/2005 - %V,%G,%Y = " . strftime("%V,%G,%Y",strtotime("1/3/2005")) . "\n";
+
+?>
+]]>
+      </programlisting>
+     </example>
+    </para>
+    <para>
+     Siehe auch <function>setlocale</function>,
+     <function>mktime</function> und die <link xlink:href="&spec.strftime;">
+     Open Group Spezifikation von <function>strftime</function></link>.
+    </para>
+   </refsect1>
+  </refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:1
+sgml-indent-data:t
+indent-tabs-mode:nil
+sgml-parent-document:nil
+sgml-default-dtd-file:"~/.phpdoc/manual.ced"
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+vim600: syn=xml fen fdm=syntax fdl=2 si
+vim: et tw=78 syn=sgml
+vi: ts=1 sw=1
+-->
