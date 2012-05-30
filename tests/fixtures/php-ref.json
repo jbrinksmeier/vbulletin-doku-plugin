@@ -1,0 +1,6 @@
+{
+    "socket_getpeername":{
+        "name": "socket_getpeername",
+        "desc":"Fragt das entfernte Ende eines gegebenen Sockets ab. Das Ergebnis\n   ist vom Typ abh\u00e4ngig und ist entweder das Paar host\/port oder ein Pfad des\n   Unix-Dateisystems"
+    }
+}

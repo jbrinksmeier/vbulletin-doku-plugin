@@ -14,7 +14,7 @@ function build_autoload($class) {
     include $file;
 }
 spl_autoload_register('build_autoload');
-$referencePath = 'references/php';
+$referencePath = 'references/externals/php';
 $refDir = new JB_Dir($referencePath);
 $functions = array();
 foreach ($refDir->ls()->getSubdirs() as $packageDir) {
@@ -25,6 +25,7 @@ foreach ($refDir->ls()->getSubdirs() as $packageDir) {
                 $functionXML = simplexml_load_string(
                     str_replace('&', '', file_get_contents(DIR_ROOT . '/' . $functionFile->getPathName())));
                 $functions[(string)$functionXML->refnamediv->refname] = array(
+                    'name'  => (string)$functionXML->refnamediv->refname,
                     'desc'  => (string)$functionXML->refnamediv->refpurpose
                 );
             }

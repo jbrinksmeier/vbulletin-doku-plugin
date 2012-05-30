@@ -2,18 +2,24 @@
 class Class_Doku_Php_Source_PHPDotNet implements Interface_Source
 {
     /**
-     * path to xml-reference-files
+     * path to json-reference
      * @var string
      */
-    const REFERENCE_PATH = 'references/php';
-    
+    const DEFAULT_REFERENCE_PATH = 'php-ref.json';
+
     /**
-     * array with function-descriptions
-     * @var array 
+     * reference-file
+     * @var string
      */
-    protected $_doku = array();
-    
-    /* (non-PHPdoc)
+    protected $_referenceFile;
+
+    /**
+     * function list
+     * @var array
+     */
+    protected $_functions = array();
+
+    /** (non-PHPdoc)
      * @see Interface/Interface_Source::getFunctionDescription()
      */
     public function getFunctionDescription($function)
@@ -23,7 +29,7 @@ class Class_Doku_Php_Source_PHPDotNet implements Interface_Source
             $functionDescription = 
                 new Class_Doku_Php_Description_JsonFunction();
             return $functionDescription->setFunction(
-                $this->_getXml($package, $parsedFunction)
+                $this->_search($parsedFunction)
             );
         } catch (Class_Doku_Exception $e) {
             $functionDescription = 
@@ -39,21 +45,53 @@ class Class_Doku_Php_Source_PHPDotNet implements Interface_Source
      */
     public static function parseFunctionName($function)
     {
-        return str_replace('_', '-', (string)$function);
+        return str_replace('-', '_', (string)$function);
     }
     
     /**
      * searchs for $function in json-doku
      * @param string $function 
-     * @return stdClass 
+     * @return stdClass
+     * @throws Class_Doku_Exception if function not found
      */
     protected function _search($function)
     {
-    
+        if (empty($this->_functions)) {
+            $this->_loadFunctions();
+        }
+        if (isset($this->_functions->$function)) {
+            return $this->_functions->$function;
+        }
+        throw new Class_Doku_Exception('Function ' . $function . ' not found');
     }
-    
-    protected function _getDoku()
+
+    /**
+     * load json-string into function list
+     */
+    protected function _loadFunctions()
     {
-        
+        $this->_functions = json_decode(
+            file_get_contents($this->getReferenceFile()));
+    }
+
+    /**
+     * @param string $referenceFile
+     * @return Class_Doku_Php_Source_PHPDotNet
+     */
+    public function setReferenceFile($referenceFile)
+    {
+        $this->_referenceFile = $referenceFile;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReferenceFile()
+    {
+        if (null === $this->_referenceFile) {
+            $this->setReferenceFile(self::DEFAULT_REFERENCE_PATH);
+        }
+        return $this->_referenceFile;
     }
 }

@@ -29,7 +29,8 @@ class Class_Doku_Php_Description_PHPDotNetLink
                    . Class_Doku_Php_Source_PHPDotNet::parseFunctionName(
                         $this->function)
                    . '">' . $this->function
-                   . '</a>';
+                   . '</a>'
+                   . PHP_EOL;
         }
         return '';
     }
